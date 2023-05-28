@@ -15,7 +15,7 @@ namespace PC_had
         int cnt;
         int step_size_x;
         int step_size_y;
-        string path = "C:\\Users\\kuza\\source\\repos\\PC_had\\PC_had\\pic\\";
+        string path = "C:\\Users\\kuza\\source\\repos\\snake\\PC_had\\PC_had\\pic\\";
         PictureBox[] snake_body;
         PictureBox snake_head = new PictureBox();
         PictureBox snake_tail = new PictureBox();
