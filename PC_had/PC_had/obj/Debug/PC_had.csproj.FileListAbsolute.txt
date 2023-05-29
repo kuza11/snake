@@ -20,3 +20,14 @@ C:\Users\kuza\source\repos\snake\PC_had\PC_had\obj\Debug\PC_had.csproj.GenerateR
 C:\Users\kuza\source\repos\snake\PC_had\PC_had\obj\Debug\PC_had.csproj.CoreCompileInputs.cache
 C:\Users\kuza\source\repos\snake\PC_had\PC_had\obj\Debug\PC_had.exe
 C:\Users\kuza\source\repos\snake\PC_had\PC_had\obj\Debug\PC_had.pdb
+C:\Users\kuza\git\snake\PC_had\PC_had\bin\Debug\PC_had.exe.config
+C:\Users\kuza\git\snake\PC_had\PC_had\bin\Debug\PC_had.exe
+C:\Users\kuza\git\snake\PC_had\PC_had\bin\Debug\PC_had.pdb
+C:\Users\kuza\git\snake\PC_had\PC_had\obj\Debug\PC_had.csproj.AssemblyReference.cache
+C:\Users\kuza\git\snake\PC_had\PC_had\obj\Debug\PC_had.csproj.SuggestedBindingRedirects.cache
+C:\Users\kuza\git\snake\PC_had\PC_had\obj\Debug\PC_had.Form1.resources
+C:\Users\kuza\git\snake\PC_had\PC_had\obj\Debug\PC_had.Properties.Resources.resources
+C:\Users\kuza\git\snake\PC_had\PC_had\obj\Debug\PC_had.csproj.GenerateResource.cache
+C:\Users\kuza\git\snake\PC_had\PC_had\obj\Debug\PC_had.csproj.CoreCompileInputs.cache
+C:\Users\kuza\git\snake\PC_had\PC_had\obj\Debug\PC_had.exe
+C:\Users\kuza\git\snake\PC_had\PC_had\obj\Debug\PC_had.pdb
