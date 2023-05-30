@@ -13,7 +13,6 @@ namespace PC_had
 {
     public partial class Form1 : Form
     {
-        bool resize = false;
         Random random = new Random();
 
         Point[] old_pos = new Point[2];
@@ -28,15 +27,14 @@ namespace PC_had
         int direction;
 
 
-        //string path = "C:\\Users\\kuza\\source\\repos\\snake\\PC_had\\PC_had\\pic\\";
-        string path = "C:\\Users\\kuza\\git\\snake\\PC_had\\PC_had\\pic\\";
+        string path = "C:\\Users\\kuza\\source\\repos\\snake\\PC_had\\PC_had\\pic\\";
+        //string path = "C:\\Users\\kuza\\git\\snake\\PC_had\\PC_had\\pic\\";
 
         PictureBox[] food = new PictureBox[10];
         PictureBox[] snake_body;
         PictureBox snake_head = new PictureBox();
         int snake_head_direction = 1;
         PictureBox snake_tail = new PictureBox();
-        int snake_tail_direction = 1;
         public Form1()
         {
             InitializeComponent();
@@ -107,143 +105,10 @@ namespace PC_had
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int free = -1;
-            bool fit = false;
-            next++;
-            if(next > 6)
-            {
-                for(int i = 0; i < occupancy.Length; i++)
-                {
-                    if (!occupancy[i])
-                    {
-                        free = i;
-                        break;
-                    }
-                }
-                next = 0;
-                if (free >= 0)
-                {
-                    food[free].Image = Image.FromFile(path + "PCparts\\image_(" + random.Next(1, 11) + ").png");
-                    food[free].Location = new Point(30 * random.Next(this.Width / 30 - 1), 30 * random.Next(this.Height / 30 - 1));
-                    for(int i = 0;i < snake_body.Length; i++)
-                    {
-                        if (food[free].Location == snake_body[i].Location)
-                        {
-                            fit = true;
-                        }
-                    }
-                    while (food[free].Location == snake_head.Location || food[free].Location == snake_tail.Location || fit)
-                    {
-                        fit = false;
-                        food[free].Location = new Point(30 * random.Next(this.Width / 30 - 1), 30 * random.Next(this.Height / 30 - 1));
-                        for (int i = 0; i < snake_body.Length; i++)
-                        {
-                            if (food[free].Location == snake_body[i].Location)
-                            {
-                                fit = true;
-                            }
-                        }
-                    }
-
-                    occupancy[free] = true;
-                }
-            }
-
-
-
-            if (resize)
-            {
-                resize = false;
-                Array.Reverse(snake_body);
-                Array.Resize(ref snake_body, snake_body.Length+1);
-                Array.Reverse(snake_body);
-                snake_body[0] = new PictureBox();
-                snake_body[0].Image = Image.FromFile(path + "snake_body.png");
-                snake_body[0].Size = new Size(30, 30);
-                snake_body[0].Parent = this;
-                snake_body[0].Location = snake_head.Location;
-            } else {
-
-
-                snake_tail.Location = snake_body.Last().Location;
-                for (int i = 0; i < snake_body.Length; i++)
-                {
-                    if (i == 0)
-                    {
-                        old_pos[0] = snake_body[i].Location;
-                        snake_body[i].Location = snake_head.Location;
-                    }
-                    else
-                    {
-                        old_pos[i % 2] = snake_body[i].Location;
-                        snake_body[i].Location = old_pos[i % 2 == 1 ? 0 : 1];
-                    }
-                }
-            }
-            snake_head.Image = Image.FromFile(path + "snake_head.png");
-
-            if (direction - snake_head_direction > 0)
-            {
-                
-                for (int i = direction - snake_head_direction; i > 0; i--)
-                {
-                    
-                    snake_head.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                }
-                
-            }
-            else if(direction - snake_head_direction < 0)
-            {
-                for(int i = direction - snake_head_direction; i < 0; i++)
-                {
-                    snake_head.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                }
-            }
-            switch (direction)
-            {
-                case 1:
-                    snake_head.Location = new Point(snake_head.Location.X + step_size_x, snake_head.Location.Y);
-                    break;
-                case 2:
-                    snake_head.Location = new Point(snake_head.Location.X, snake_head.Location.Y - step_size_y);
-                    break;
-                case 3:
-                    snake_head.Location = new Point(snake_head.Location.X - step_size_x, snake_head.Location.Y);
-                    break;
-                case 4:
-                    snake_head.Location = new Point(snake_head.Location.X, snake_head.Location.Y + step_size_y);
-                    break;
-            }
-            snake_tail.Image = Image.FromFile(path + "snake_tail.png");
-            if (snake_body.Last().Location.X < snake_tail.Location.X)
-            {
-                snake_tail.Image.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            }
-            else if (snake_body.Last().Location.Y > snake_tail.Location.Y)
-            {
-                snake_tail.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            }
-            else if (snake_body.Last().Location.Y < snake_tail.Location.Y)
-            {
-                snake_tail.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            }
-
-            if(snake_head.Location.X < 0 || snake_head.Location.X + 30 > this.Width || snake_head.Location.Y < 0 || snake_head.Location.Y + 31 > this.Height || snake_head.Location == snake_tail.Location)
-            {
-                timer1.Enabled = false;
-                label2.Visible = true;
-                label1.Visible = true;
-            }
-            for(int i = 0; i < snake_body.Length; i++)
-            {
-                if (snake_body[i].Location == snake_head.Location)
-                {
-                    timer1.Enabled = false;
-                    label2.Visible = true;
-                    label1.Visible = true;
-                }
-            }
-
+            Food_Body();   
+            Head();
+            Tail();
+            GameOver();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -286,6 +151,157 @@ namespace PC_had
                     break;
             }
             e.SuppressKeyPress = true;
+        }
+
+        private void Food_Body()
+        {
+            bool scored = false;
+            int free = -1;
+            bool fit = false;
+            next++;
+            if (next > 6)
+            {
+                for (int i = 0; i < occupancy.Length; i++)
+                {
+                    if (!occupancy[i])
+                    {
+                        free = i;
+                        break;
+                    }
+                }
+                next = 0;
+                if (free >= 0)
+                {
+                    food[free].Image = Image.FromFile(path + "PCparts\\image_(" + random.Next(1, 11) + ").png");
+                    food[free].Location = new Point(30 * random.Next(this.Width / 30 - 1), 30 * random.Next(this.Height / 30 - 1));
+                    food[free].Visible = true;
+                    for (int i = 0; i < snake_body.Length; i++)
+                    {
+                        if (food[free].Location == snake_body[i].Location)
+                        {
+                            fit = true;
+                        }
+                    }
+                    while (food[free].Location == snake_head.Location || food[free].Location == snake_tail.Location || fit)
+                    {
+                        fit = false;
+                        food[free].Location = new Point(30 * random.Next(this.Width / 30 - 1), 30 * random.Next(this.Height / 30 - 1));
+                        for (int i = 0; i < snake_body.Length; i++)
+                        {
+                            if (food[free].Location == snake_body[i].Location)
+                            {
+                                fit = true;
+                            }
+                        }
+                    }
+
+                    occupancy[free] = true;
+                }
+            }
+
+            for (int i = 0; i < food.Length; i++)
+            {
+                if (snake_head.Location == food[i].Location)
+                {
+                    scored = true;
+                    food[i].Visible = false;
+                    occupancy[i] = false;
+                    Array.Reverse(snake_body);
+                    Array.Resize(ref snake_body, snake_body.Length + 1);
+                    Array.Reverse(snake_body);
+                    snake_body[0] = new PictureBox();
+                    snake_body[0].Image = Image.FromFile(path + "snake_body.png");
+                    snake_body[0].Size = new Size(30, 30);
+                    snake_body[0].Parent = this;
+                    snake_body[0].Location = snake_head.Location;
+                }
+            }
+
+            if (!scored)
+            {
+                snake_tail.Location = snake_body.Last().Location;
+                snake_body.Last().Location = snake_head.Location;
+                Array.Reverse(snake_body);
+                Array.Resize(ref snake_body, snake_body.Length + 1);
+                snake_body[snake_body.Length - 1] = snake_body[0];
+                Array.Reverse(snake_body);
+                Array.Resize(ref snake_body, snake_body.Length - 1);
+            }
+        }
+
+        private void Head()
+        {
+            snake_head.Image = Image.FromFile(path + "snake_head.png");
+            snake_head.BringToFront();
+
+            if (direction - snake_head_direction > 0)
+            {
+
+                for (int i = direction - snake_head_direction; i > 0; i--)
+                {
+
+                    snake_head.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                }
+
+            }
+            else if (direction - snake_head_direction < 0)
+            {
+                for (int i = direction - snake_head_direction; i < 0; i++)
+                {
+                    snake_head.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                }
+            }
+            switch (direction)
+            {
+                case 1:
+                    snake_head.Location = new Point(snake_head.Location.X + step_size_x, snake_head.Location.Y);
+                    break;
+                case 2:
+                    snake_head.Location = new Point(snake_head.Location.X, snake_head.Location.Y - step_size_y);
+                    break;
+                case 3:
+                    snake_head.Location = new Point(snake_head.Location.X - step_size_x, snake_head.Location.Y);
+                    break;
+                case 4:
+                    snake_head.Location = new Point(snake_head.Location.X, snake_head.Location.Y + step_size_y);
+                    break;
+            }
+        }
+
+        private void Tail()
+        {
+            snake_tail.Image = Image.FromFile(path + "snake_tail.png");
+            if (snake_body.Last().Location.X < snake_tail.Location.X)
+            {
+                snake_tail.Image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            }
+            else if (snake_body.Last().Location.Y > snake_tail.Location.Y)
+            {
+                snake_tail.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            }
+            else if (snake_body.Last().Location.Y < snake_tail.Location.Y)
+            {
+                snake_tail.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            }
+        }
+
+        private void GameOver()
+        {
+            if (snake_head.Location.X < 0 || snake_head.Location.X + 30 > this.Width || snake_head.Location.Y < 0 || snake_head.Location.Y + 31 > this.Height || snake_head.Location == snake_tail.Location)
+            {
+                timer1.Enabled = false;
+                label2.Visible = true;
+                label1.Visible = true;
+            }
+            for (int i = 0; i < snake_body.Length; i++)
+            {
+                if (snake_body[i].Location == snake_head.Location)
+                {
+                    timer1.Enabled = false;
+                    label2.Visible = true;
+                    label1.Visible = true;
+                }
+            }
         }
     }
 }
