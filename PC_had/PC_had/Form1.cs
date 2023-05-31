@@ -56,6 +56,7 @@ namespace PC_had
                 food[i].Size = new Size(30, 30);
                 food[i].Parent = this;
                 food[i].SizeMode = PictureBoxSizeMode.Zoom;
+                food[i].BackColor = Color.Transparent;
             }
             for(int i = 0; i < occupancy.Length; i++)
             {
@@ -98,7 +99,7 @@ namespace PC_had
             }
             else
             {
-                timer1.Interval = 150;
+                timer1.Interval = 175;
             }
 
             radioButton1.Visible = false;
