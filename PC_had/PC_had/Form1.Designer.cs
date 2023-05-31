@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
@@ -69,38 +70,46 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.BackColor = System.Drawing.Color.Transparent;
             this.radioButton1.Checked = true;
+            this.radioButton1.ForeColor = System.Drawing.Color.White;
             this.radioButton1.Location = new System.Drawing.Point(12, 39);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(47, 17);
             this.radioButton1.TabIndex = 3;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "easy";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.UseVisualStyleBackColor = false;
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
+            this.radioButton2.BackColor = System.Drawing.Color.Transparent;
+            this.radioButton2.ForeColor = System.Drawing.Color.White;
             this.radioButton2.Location = new System.Drawing.Point(12, 62);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(61, 17);
             this.radioButton2.TabIndex = 4;
             this.radioButton2.Text = "medium";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.UseVisualStyleBackColor = false;
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
+            this.radioButton3.BackColor = System.Drawing.Color.Transparent;
+            this.radioButton3.ForeColor = System.Drawing.Color.White;
             this.radioButton3.Location = new System.Drawing.Point(12, 85);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(46, 17);
             this.radioButton3.TabIndex = 5;
             this.radioButton3.Text = "hard";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(390, 309);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 13);
@@ -113,6 +122,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(884, 561);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.radioButton3);

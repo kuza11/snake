@@ -27,8 +27,8 @@ namespace PC_had
         int direction;
 
 
-        string path = "C:\\Users\\kuza\\source\\repos\\snake\\PC_had\\PC_had\\pic\\";
-        //string path = "C:\\Users\\kuza\\git\\snake\\PC_had\\PC_had\\pic\\";
+        //string path = "C:\\Users\\kuza\\source\\repos\\snake\\PC_had\\PC_had\\pic\\";
+        string path = "C:\\Users\\kuza\\git\\snake\\PC_had\\PC_had\\pic\\";
 
         PictureBox[] food = new PictureBox[10];
         PictureBox[] snake_body;
@@ -52,6 +52,7 @@ namespace PC_had
             for(int i = 0; i < food.Length; i++)
             {
                 food[i] = new PictureBox();
+                food[i].Visible = false;
                 food[i].Size = new Size(30, 30);
                 food[i].Parent = this;
                 food[i].SizeMode = PictureBoxSizeMode.Zoom;
@@ -67,7 +68,9 @@ namespace PC_had
             snake_head.Size = new Size(30, 30);
             snake_head.Parent = this;
             snake_head.Location = new Point(step_size_x*5, step_size_y*5);
+            snake_head.BackColor = Color.Transparent;
             snake_head.Visible = true;
+            
 
 
             snake_body = new PictureBox[1];
@@ -82,6 +85,7 @@ namespace PC_had
             snake_tail.Size = new Size(30, 30);
             snake_tail.Parent = this;
             snake_tail.Location = new Point(snake_body.Last().Location.X - 30 , snake_body.Last().Location.Y);
+            snake_tail.BackColor = Color.Transparent;
             snake_tail.Visible = true;
 
             if (radioButton1.Checked)
@@ -146,9 +150,6 @@ namespace PC_had
                 case "S":
                     direction = 4;
                     break;
-                case "L":
-                    resize = true;
-                    break;
             }
             e.SuppressKeyPress = true;
         }
@@ -210,10 +211,12 @@ namespace PC_had
                     Array.Resize(ref snake_body, snake_body.Length + 1);
                     Array.Reverse(snake_body);
                     snake_body[0] = new PictureBox();
+                    snake_body[0].Visible = false;
                     snake_body[0].Image = Image.FromFile(path + "snake_body.png");
                     snake_body[0].Size = new Size(30, 30);
                     snake_body[0].Parent = this;
                     snake_body[0].Location = snake_head.Location;
+                    snake_body[0].Visible = true;
                 }
             }
 
